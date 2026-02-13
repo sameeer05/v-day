@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Love Story ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff4e8a, #ff9a9e);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: white;
+}
+
+/* ================= INTRO SCREEN ================= */
+
+.intro {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    text-align: center;
+    background: linear-gradient(135deg, #ff4e8a, #ff9a9e);
+    z-index: 10;
+}
+
+.typewriter {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    max-width: 600px;
+    line-height: 1.6;
+    min-height: 120px;
+}
+
+.continue-btn {
+    margin-top: 30px;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: none;
+    background: white;
+    color: #ff4e8a;
+    font-size: 1rem;
+    cursor: pointer;
+    display: none;
+}
+
+/* ================= MAIN CONTENT ================= */
+
+.main {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin-bottom: 20px;
+}
+
+/* Slideshow */
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    height: 450px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fade {
+    animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+    from { opacity: .4 }
+    to { opacity: 1 }
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    font-size: 18px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.dots {
+    margin-top: 15px;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 4px;
+    background: white;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.active { opacity: 1; }
+
+.proposal {
+    margin-top: 30px;
+}
+
+button {
+    padding: 12px 28px;
+    font-size: 1rem;
+    border-radius: 50px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.yes {
+    background: white;
+    color: #ff4e8a;
+}
+
+.no {
+    background: #ff1e56;
+    color: white;
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.7);
+}
+
+.popup-content {
+    background: white;
+    color: #ff4e8a;
+    padding: 30px;
+    border-radius: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div class="intro">
+    <div class="typewriter" id="typewriter"></div>
+    <button class="continue-btn" id="continueBtn" onclick="startSlideshow()">Continue ❤️</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main" id="mainContent">
+    <h1>Our Beautiful Memories ❤️</h1>
+
+    <div class="slideshow-container">
+        <div class="slide fade"><img src="photo1.jpg"></div>
+        <div class="slide fade"><img src="photo2.jpg"></div>
+        <div class="slide fade"><img src="photo3.jpg"></div>
+        <div class="slide fade"><img src="photo4.jpg"></div>
+        <div class="slide fade"><img src="photo5.jpg"></div>
+        <div class="slide fade"><img src="photo6.jpg"></div>
+        <div class="slide fade"><img src="photo7.jpg"></div>
+
+        <div class="prev" onclick="plusSlides(-1)">❮</div>
+        <div class="next" onclick="plusSlides(1)">❯</div>
+    </div>
+
+    <div class="dots">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+        <span class="dot" onclick="currentSlide(6)"></span>
+        <span class="dot" onclick="currentSlide(7)"></span>
+    </div>
+
+    <div class="proposal">
+        <h2>Will You Be My Valentine? 💖</h2>
+        <button class="yes" onclick="showPopup()">Yes 💕</button>
+        <button class="no" onmouseover="moveNoButton()" ontouchstart="moveNoButton()">No 😜</button>
+    </div>
+</div>
+
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h2>Yayyy!!! 💍💖</h2>
+        <p>You just made me the happiest person alive ❤️</p>
+    </div>
+</div>
+
+<script>
+
+/* ===== TYPEWRITER EFFECT ===== */
+
+const message = `From the moment you walked into my life,
+everything changed.
+
+You became my smile on bad days,
+my calm in chaos,
+and my favorite notification.
+
+Today, I want to ask you something very special... ❤️`;
+
+let i = 0;
+const speed = 40;
+const typewriter = document.getElementById("typewriter");
+const continueBtn = document.getElementById("continueBtn");
+
+function typeEffect() {
+    if (i < message.length) {
+        typewriter.innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeEffect, speed);
+    } else {
+        continueBtn.style.display = "inline-block";
+    }
+}
+
+typeEffect();
+
+/* ===== TRANSITION ===== */
+
+function startSlideshow() {
+    document.querySelector(".intro").style.display = "none";
+    document.getElementById("mainContent").style.display = "flex";
+    showSlides(slideIndex);
+}
+
+/* ===== SLIDESHOW ===== */
+
+let slideIndex = 1;
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    const slides = document.getElementsByClassName("slide");
+    const dots = document.getElementsByClassName("dot");
+
+    if (n > slides.length) slideIndex = 1;
+    if (n < 1) slideIndex = slides.length;
+
+    for (let s of slides) s.style.display = "none";
+    for (let d of dots) d.classList.remove("active");
+
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].classList.add("active");
+}
+
+setInterval(() => {
+    if (document.getElementById("mainContent").style.display === "flex") {
+        plusSlides(1);
+    }
+}, 3000);
+
+/* ===== PROPOSAL BUTTONS ===== */
+
+function showPopup() {
+    document.getElementById("popup").style.display = "flex";
+}
+
+function moveNoButton() {
+    const btn = document.querySelector(".no");
+    btn.style.position = "fixed";
+    btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+}
+</script>
+
+</body>
+</html>
